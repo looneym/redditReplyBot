@@ -15,7 +15,7 @@ words_to_match = [" arse ", " feck ", " shite ", " cop on " , " culchie ", " eej
 def runBot(userMode):
     print("Bot running. Mode = " + userMode)
     print("getting subreddit...")
-    subreddit = r.get_subreddit("ireland")
+    subreddit = r.get_subreddit("test")
     print("getting comments...")
     comments = subreddit.get_comments(limit=1000)
     print("comments retrieved, begin comparison...")
@@ -27,7 +27,7 @@ def runBot(userMode):
             print("comment found, id = " + str(comment.id))
             comment_cache.update({comment.id:comment.body})
             print("comment cached")
-            if userMode == "live":
+            if userMode == "live" or userMode =="indefinite":
                 comment.reply("Through sophisticated lexical analysis I have determined \
                     that you are from Ireland. Am I correct?")
                 print("comment replied to")
@@ -44,7 +44,8 @@ def runBot(userMode):
 def userMenu():
     print("Enter a number to specify which mode to operate in")
     print("1 - Test mode - Any matches found are entered into a cache and printed to the console once all comments have been analysed")
-    print("2 - 'Live mode' - Comments are replied to in real time by the bot. Be careful, this can annoy people")
+    print("2 - Live mode - Comments are replied to in real time by the bot. Be careful, this can annoy people")
+    print("3 - Indefinite mode - Bot will continually fetch and process new comments until it is interrupted")
     choice = input("Enter number: ")
     if int(choice) == 1:
         runBot("test")
@@ -52,8 +53,9 @@ def userMenu():
         runBot("live")
     elif int(choice) == 3:
         while True:
-            runBot("live")
-            time.wait(10)
+            runBot("indefinite")
+            time.sleep(10)
+            print("restart...")
 
 userMenu()
 
