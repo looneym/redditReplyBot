@@ -8,6 +8,7 @@ print("logging in...")
 
 content_tracker = {}
 actioned_comments = []
+running_count = 0 
 words_to_match = [" arse ", " feck ", " shite ", " cop on " , " culchie ", " eejit ", \
                   " gaff ", " gammy " , " jackeen ", " langer " , " manky ", " naggin ", \
                   " skanger " , " gobshite " ]
@@ -24,6 +25,9 @@ reply_string = "Through sophisticated lexical analysis I have determined that yo
 
 
 def runBot(userMode):
+    global running_count
+    running_count = running_count + 1
+    print("running count: " + str(running_count))
     print("Bot running. Mode = " + userMode)
     print("getting subreddit...")
     subreddit = r.get_subreddit("all")
