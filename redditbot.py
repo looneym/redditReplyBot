@@ -7,12 +7,13 @@ r.login()
 print("logging in...")
 
 comment_cache = {}
-words_to_match = [" arse ", " feck ", " shite ", " cop on " , " culchie ", "eejit ", \
+words_to_match = [" arse ", " feck ", " shite ", " cop on " , " culchie ", " eejit ", \
                   " gaff ", " gammy " , " jackeen ", " langer " , " manky ", " naggin ", \
                   " skanger " , " gobshite " ]
 
 
-def runBot(mode):
+def runBot(userMode):
+    print("Bot running. Mode = " + userMode)
     print("getting subreddit...")
     subreddit = r.get_subreddit("ireland")
     print("getting comments...")
@@ -26,32 +27,34 @@ def runBot(mode):
             print("comment found, id = " + str(comment.id))
             comment_cache.update({comment.id:comment.body})
             print("comment cached")
-            if mode == live:
+            if userMode == "live":
                 comment.reply("Through sophisticated lexical analysis I have determined \
                     that you are from Ireland. Am I correct?")
                 print("comment replied to")
-            
 
     for commentID,commentText in comment_cache.items():
         print("comment id: ")
         print(commentID)
         print("comment text: ")
         print(commentText)
-        print("========================================================")       
+        print("===============================")
+
+
 
 def userMenu():
     print("Enter a number to specify which mode to operate in")
-    print("1 - Test mode - Any matches found are entered into a cache and printed \
-          the console once all comments have been analysed")
-    print("2 - 'Live mode' - Comments are replied to in real time by the bot. \
-          Be careful, this can annoy people")
+    print("1 - Test mode - Any matches found are entered into a cache and printed to the console once all comments have been analysed")
+    print("2 - 'Live mode' - Comments are replied to in real time by the bot. Be careful, this can annoy people")
     choice = input("Enter number: ")
-    if choice == 1:
+    if int(choice) == 1:
         runBot("test")
-    elif choice == 2:
+    elif int(choice) == 2:
         runBot("live")
+    elif int(choice) == 3:
+        while True:
+            runBot("live")
+            time.wait(10)
 
 userMenu()
-
 
 
