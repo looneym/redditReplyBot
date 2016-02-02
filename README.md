@@ -4,3 +4,4 @@ Made to improve my skills with Python as well as trying out git and virtualenv a
 
 Initial code based off a YouTube tutorial by Wesinema, additional features to follow. 
 
+UPDATE: bot decomissioned due to unfavourable feedback. 
